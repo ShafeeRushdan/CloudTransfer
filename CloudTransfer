@@ -1,0 +1,44 @@
+
+
+#User enters the name of a file and it gets copied from one location to the other
+
+Try {
+
+    $source = "/Users/shafeerushdan/Documents/firstFolder"
+    $destination = "/Users/shafeerushdan/Documents/secondFolder"
+    [name]$first = 'folderName'
+    [name]$second= 'folderName'
+    
+     #Prod
+     Get-ChildItem $source | ForEach-Object{ Get-ChildItem $_.folderName | Where-Object{ $_.LastWriteTime -gt $first-and $_.LastWriteTime -lt $second } | 
+     
+    Copy-Item -Destination $destination -Recurse -Force 
+    
+           }
+    }
+    
+    #finish catch statement that prints a message if file doesn’t exist 
+    
+    # Catch [
+    
+    # $Folder = 'C:\Windows'
+    # "Test to see if folder [$Folder]  exists”
+    # if (Test-Path -Path $Folder) {
+    #  write-host   (“Path exist”)
+    # } else {
+    #     write-host("This file doesn’t exist")
+    # }
+    
+    # ]
+    
+    #once the file is copied to the new destination the original file is deleted 
+    
+    Finally {
+    
+    If($source === $destination) {
+    
+    Delete-Item -Destination $source -Recurse -Force
+    
+    }
+    
+}
